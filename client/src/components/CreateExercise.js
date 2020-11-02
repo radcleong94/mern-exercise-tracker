@@ -13,7 +13,7 @@ const CreateExercise = () => {
     const [users,setUsers] = useState([]);
 
      useEffect(()=>{
-         axios.get('http://localhost:5000/users')
+         axios.get('/users')
             .then((res)=>{
                 if(res.data.length > 0 ){
                     setUsers(res.data.map((user)=> user.username))
@@ -51,7 +51,7 @@ const CreateExercise = () => {
             date
         }
 
-        axios.post('http://localhost:5000/exercise/add',exercise)
+        axios.post('/exercise/add',exercise)
             .then((res)=>{
                 console.log(res.data)
             })

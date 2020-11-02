@@ -15,21 +15,7 @@ mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true,useUnifiedTopolog
     console.log('failed to connect database...')
 })
 
-const whitelist = ['http://localhost:3000', 'http://localhost:5000', 'https://mern-exercise-tracker-project.herokuapp.com']
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
-    } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.json())
@@ -40,15 +26,12 @@ const execriseRouter = require('./routes/exercise');
 app.use('/users',usersRouter);
 app.use('/exercise',execriseRouter);
 
-//heroku deploy method
-if (process.env.NODE_ENV === 'production') {
     // Serve any static files
     app.use(express.static(path.join(__dirname, 'client/build')));
   // Handle React routing, return all requests to React app
     app.get('*', function(req, res) {
       res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
-  }
 
 const port = process.env.PORT || 5000;
 

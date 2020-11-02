@@ -7,7 +7,7 @@ const ExerciseList = () => {
     const [exercise,setExercise] = useState([])
     
     useEffect(()=>{
-        axios.get('http://localhost:5000/exercise')
+        axios.get('/exercise')
             .then((res)=>{
                 setExercise(res.data);
                 console.log(exercise)
@@ -18,7 +18,7 @@ const ExerciseList = () => {
     },[])
 
     const deleteExercise = (id)=>{
-        axios.delete('http://localhost:5000/exercise/'+id)
+        axios.delete('/exercise/'+id)
             .then((res)=>{
                 console.log(res.data)
                 exercise.filter(result => result._id !== id)

@@ -15,7 +15,7 @@ const EditExercise = () => {
     const {id} = useParams();
 
     useEffect(()=>{
-        axios.get('http://localhost:5000/exercise/'+id)
+        axios.get('/exercise/'+id)
             .then((res)=>{
                 setUsername(res.data.username);
                 setDescription(res.data.description);
@@ -28,7 +28,7 @@ const EditExercise = () => {
 
         
 
-        axios.get('http://localhost:5000/users')
+        axios.get('/users')
            .then((res)=>{
                if(res.data.length > 0 ){
                    setUsers(res.data.map((user)=> user.username))
@@ -65,7 +65,7 @@ const EditExercise = () => {
             date
         }
 
-        axios.post('http://localhost:5000/exercise/update/'+id,exercise)
+        axios.post('/exercise/update/'+id,exercise)
             .then((res)=>{
                 console.log(res.data)
             })
